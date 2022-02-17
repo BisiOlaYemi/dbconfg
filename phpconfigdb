@@ -1,0 +1,31 @@
+<?php
+$conn = mysqli_connect('localhost','easycars_reg','easycarsreg@1','easycars_disc');
+
+if(!$conn)
+{
+	die('Connection failed!'.mysqli_error($conn));
+}
+$FirstName = $_POST['FirstName'];
+$LastName = $_POST['LastName'];
+$Address = $_POST['Address'];
+$Email = $_POST['Email'];
+$TelNumber = $_POST['TelNumber'];
+
+
+$sqli = "INSERT INTO discount(FirstName,LastName,Address,Email,TelNumber) 
+VALUES('$FirstName','$LastName','$Address','$Email','$TelNumber')";
+
+if(mysqli_query($conn,$sqli))
+{
+	$Msg = " Thank You for Registering! You'll be considered for discount on your first booking<br> T&C Apply <br> "; 
+            echo '<div class="jumbotron" class="alert alert-success" style="font-size:18px;border:2px  red;" >'.$Msg. '</div>';
+            
+}
+else
+{
+	echo mysqli_error($conn);
+}
+//redirect
+header("location:index.html");
+
+?>
